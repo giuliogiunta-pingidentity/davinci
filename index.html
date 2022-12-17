@@ -6,23 +6,22 @@
     <title>Beginner's Luck - Account Registration</title>
 
     <script type="text/javascript"
-      src="https://pingsandboxsdk.singularkey.com/latest/singularkey.js">
+      src="https://assets.pingone.com/davinci/latest/davinci.js">
     </script>
 
     <script>
-      function loadwidget() {    
-        const skApiBaseUrl = "https://api.singularkey.com/v1";
+      function loadwidget() { 
         const companyId = "8eda8ff8-5cfc-4856-8d61-ca96c10f7a30";
         const skApiKey = "f10defdbce876003501f73b956e7276156a2cbf8abe3e749f728bd4dee609ea6374be2d467445ce346f6be933a7a0b83ae247bc747ae7280dda0d201eb21f276fdb3199cc94fd87e97d0c6fad389a02a617cc6f9730d1d2f84a92c66a28c8013a16b7c496bc77db9bd63012d98a042b402e5b06581bcb16b9b4fb9391c982bd1";
-        const skPolicyId = "b0dcacde2d7f16ccf2cc89b534ce7a8d";
 
+        //*** Build the get DaVinci SDK Token URL. ***/
         const skGetTokenUrl =
-          skApiBaseUrl + "/company/" + companyId + "/sdkToken";
+          "https://orchestrate-api.pingone.com/v1/company/" +
+          companyId + "/sdktoken";
 
         //*** Add the API Key from your DaVinci Application. ***/
         var headers = new Headers();
         headers.append("X-SK-API-KEY", skApiKey);
-        headers.append("Content-type", "application/json");
 
         var requestOptions = {
           method: "GET",
@@ -37,10 +36,10 @@
             var props = {
               config: {
                 method: "runFlow",
-                apiRoot: skApiBaseUrl,
+                apiRoot: "https://auth.pingone.com/",
                 accessToken: responseData.access_token,
                 companyId: companyId,
-                policyId: skPolicyId,
+                policyId: "b0dcacde2d7f16ccf2cc89b534ce7a8d",
               },
               useModal: false,
               successCallback,
@@ -49,7 +48,7 @@
             };
             /*** Invoke DaVinci Widget ****/
             console.log(props);
-            singularkey.skRenderScreen(document.getElementById("widget"), props);
+            davinci.skRenderScreen(document.getElementById("widget"), props);
           })
           .catch((error) => console.log("error", error));
       }
@@ -73,7 +72,7 @@
       If you're seeing this message, the DaVinci flow hasn't loaded yet. 
     </div>
     <div class="glitch">
-      <a class="remix" target="_top" href="https://glitch.com/edit/#!/remix/pingone-davinci-201">
+      <a class="remix" target="_top" href="https://glitch.com/edit/#!/201-html-conversion">
         <img src="https://cdn.glitch.com/605e2a51-d45f-4d87-a285-9410ad350515%2FLogo_Color.svg?v=1618199565140" />
         Remix on Glitch
       </a>
